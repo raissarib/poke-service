@@ -1,12 +1,10 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/raissarib/poke-service.git/server/routes"
 )
 
 type Forms []struct {
@@ -17,33 +15,7 @@ type Forms []struct {
 func main() {
 	app := fiber.New()
 
-	app.Get(":name", func(c *fiber.Ctx) error {
-		name := c.Params("name")
-
-		// Monta a URL da PokéAPI com base no ID fornecido
-		apiURL := fmt.Sprintf("https://pokeapi.co/api/v2/pokemon/%s", name)
-
-		// Faz uma requisição GET para a PokéAPI
-		resposta, err := http.Get(apiURL)
-		if err != nil {
-			return c.Status(500).JSON("Erro ao fazer a requisição")
-		}
-		defer resposta.Body.Close()
-
-		body, err := io.ReadAll(resposta.Body)
-		if err != nil {
-			return c.Status(http.StatusBadRequest).JSON("Erro ao fazer requisição")
-		}
-
-		var forms Forms
-		err = json.Unmarshal(body, &forms)
-		if err != nil {
-			return c.Status(http.StatusBadRequest).JSON("Erro ao decodificar a resposta")
-		}
-
-		// Retorna as informações da característica como resposta
-		return c.Status(http.StatusOK).JSON(forms)
-	})
+	routes.Pokemon(app)
 
 	// Inicia o servidor na porta 2000
 	err := app.Listen(":3000")
