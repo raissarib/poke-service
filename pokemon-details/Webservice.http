@@ -1,0 +1,6 @@
+@Webservice_HostAddress = http://localhost:5091
+
+GET {{Webservice_HostAddress}}/Pokemon/get-abitilities/name
+Accept: application/json
+
+###
