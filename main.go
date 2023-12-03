@@ -45,8 +45,8 @@ func main() {
 		return c.Status(http.StatusOK).JSON(forms)
 	})
 
-	// Inicia o servidor na porta 3000
-	err := app.Listen(":2000")
+	// Inicia o servidor na porta 2000
+	err := app.Listen(":3000")
 	if err != nil {
 		fmt.Println("Erro ao iniciar o servidor:", err)
 	}
