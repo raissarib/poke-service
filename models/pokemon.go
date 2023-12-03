@@ -13,5 +13,4 @@ type Pokemon struct {
 	} `json:"abilities"`
 	Height string `json:"height"`
 	Weight string `json:"weight"`
-	Mega   bool   `json:"mega"`
 }
