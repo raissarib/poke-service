@@ -21,7 +21,10 @@ func GetPokemon(c *fiber.Ctx) error {
 	}
 
 	var pokemons []models.Pokemon
-	json.Unmarshal(body, &pokemons)
+	err = json.Unmarshal(body, &pokemons)
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON("Erro ao pegar as informações do pokemon")
+	}
 
 	// Retorna as informações da característica como resposta
 
