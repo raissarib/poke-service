@@ -11,12 +11,9 @@ import (
 )
 
 func GetPokemon(c *fiber.Ctx) error {
-	id, err := c.ParamsInt("id", 0)
-	if err != nil {
-		return c.Status(http.StatusBadRequest).JSON("Id inválido")
-	}
+	name := c.Params("name")
 
-	apiURL := fmt.Sprintf("https://ex.traction.one/pokedex/pokemon/%d", id)
+	apiURL := fmt.Sprintf("https://ex.traction.one/pokedex/pokemon/%s", name)
 
 	body, err := utils.Get(apiURL)
 	if err != nil {

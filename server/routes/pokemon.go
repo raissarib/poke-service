@@ -8,6 +8,6 @@ import (
 func Pokemon(app *fiber.App) {
 	group := app.Group("pokemon/")
 
-	group.Get(":id", controllers.GetPokemon)
+	group.Get(":name", controllers.GetPokemon)
 
 }
